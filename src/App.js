@@ -108,7 +108,7 @@ function App() {
         transition: "all 0.3s ease",
       }}
     >
-      <h1>My To-Do App</h1>
+      <h1>To-Do</h1>
 
       {/* 🌙 THEME TOGGLE */}
       <button
@@ -129,6 +129,9 @@ function App() {
           value={task}
           onChange={(e) => setTask(e.target.value)}
           placeholder="Enter a task"
+          onKeyDown={(e) => {
+            if (e.key === "Enter") addTask();
+          }}
           style={{
             padding: "8px",
             borderRadius: "4px",
@@ -136,9 +139,9 @@ function App() {
             marginRight: "10px",
             backgroundColor: colors.inputBg,
             color: colors.text,
-
           }}
         />
+
         <button
           onClick={addTask}
           style={buttonStyle}
@@ -217,6 +220,9 @@ function App() {
                   type="text"
                   value={editingText}
                   onChange={(e) => setEditingText(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") saveEdit(t.id);
+                  }}
                   style={{
                     marginLeft: "10px",
                     padding: "6px",
@@ -226,6 +232,7 @@ function App() {
                     color: colors.text,
                   }}
                 />
+
                 <button
                   onClick={() => saveEdit(t.id)}
                   style={{ ...buttonStyle, color: "lightgreen" }}
